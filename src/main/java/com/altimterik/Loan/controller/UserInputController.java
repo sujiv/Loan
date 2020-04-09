@@ -41,8 +41,13 @@ public class UserInputController {
         try {
             FileStorage image = new FileStorage();
             image.setIrs941(mf.get(0).getBytes());
+            image.setIrs941OrginalFilesName(mf.get(0).getOriginalFilename());
+
+            image.setHealthcareCostsOrginalFilesName(mf.get(1).getOriginalFilename());
             image.setHealthcareCosts(mf.get(1).getBytes());
+
             image.setGrossPayroll(mf.get(2).getBytes());
+            image.setGrossPayrollOrginalFilesName(mf.get(2).getOriginalFilename());
 
             image.setUserInputId(currentuserInputId);
             image= fileStorageRepository.save(image);
