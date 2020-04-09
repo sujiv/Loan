@@ -1,10 +1,13 @@
 package com.altimterik.Loan.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name="application_details")
+@Data
 public class ApplicationDetails {
     @Id
     @GeneratedValue
@@ -25,8 +28,11 @@ public class ApplicationDetails {
     public Double multiplier2dot5;
     public Double EDIL_ObtainedFrmJan31ToBeRefinanced;
     public Double PPP_LoadAmntLesserOfCalcOr10Mil;
+    @Column(length = 1000, nullable = true)
     public String fieldComments;
+    @Column(length = 1000, nullable = true)
     public String fieldAutoVerified;
+    @Column(length = 1000, nullable = true)
     public String applicationComments;
     public Boolean processedFlag;
     public String processStatus;

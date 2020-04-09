@@ -11,11 +11,12 @@ import javax.persistence.*;
 public class UserInputs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column (name = "id")
     public Integer userInputId;
     public String legalName;
     public String primaryContact;
     public String businessPhone;
-    public String TIN_EIN_SIN;
+    public String TIN;
     public String accounts;
     public String email;
     public Boolean nonProfit;

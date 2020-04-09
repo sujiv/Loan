@@ -13,11 +13,17 @@ import java.time.LocalDate;
 //@Table(name = "file_storage")
 public class FileStorage {
 
+   
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     Integer blobID;
 
-    Integer userInputId;
+    public Integer getUserInputId() {
+        return userInputId;
+    }
+
+    private Integer userInputId;
 
     @Lob
     private byte[] irs941;
@@ -39,6 +45,10 @@ public class FileStorage {
     private Boolean grossPayrollProcessed = false;
 
     private Timestamp createdTs;
+    
+    public void setUserInputId(Integer userInputId) {
+        this.userInputId = userInputId;
+    }
 
     public FileStorage() {
     }
