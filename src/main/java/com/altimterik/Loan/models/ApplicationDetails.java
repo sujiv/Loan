@@ -34,5 +34,5 @@ public class ApplicationDetails {
 //    @Column(name = "createdTs", insertable = false, updatable = false)
 //    @Temporal(TemporalType.TIMESTAMP)
 //    @Column(name="created_ts", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable=false, updatable=false)
-    public Date createdTs;
+//    public Date createdTs;
 }

@@ -6,7 +6,6 @@ import com.altimterik.Loan.repository.FileStorageRepository;
 import com.altimterik.Loan.repository.UserInputRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,8 +41,13 @@ public class UserInputController {
         try {
             FileStorage image = new FileStorage();
             image.setIrs941(mf.get(0).getBytes());
+            image.setIrs941OrginalFilesName(mf.get(0).getOriginalFilename());
+
+            image.setHealthcareCostsOrginalFilesName(mf.get(1).getOriginalFilename());
             image.setHealthcareCosts(mf.get(1).getBytes());
+
             image.setGrossPayroll(mf.get(2).getBytes());
+            image.setGrossPayrollOrginalFilesName(mf.get(2).getOriginalFilename());
 
             image.setUserInputId(currentuserInputId);
             image= fileStorageRepository.save(image);
@@ -56,7 +60,7 @@ public class UserInputController {
 
     }
 
-//    ============= posting a all basic  user Input data========================
+//    ============= Saving all basic user Input data========================
 
     @PostMapping("/sba/loan/upload/basicdata")
     public ResponseEntity<String> uploadPolicyDocument(@RequestBody UserInputs filledUserInputs){
@@ -68,7 +72,6 @@ public class UserInputController {
             userInputs = userInputRepository.save(userInputs);
 
             currentuserInputId= userInputs.getUserInputId();
-
             System.out.println("\n\n\n\n  current UserID is " +  currentuserInputId);
 
             return new ResponseEntity<String>(" your loan application is created successfully with the following ID " + userInputs.getUserInputId(), HttpStatus.CREATED);
