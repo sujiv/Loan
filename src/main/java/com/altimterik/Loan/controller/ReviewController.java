@@ -1,5 +1,6 @@
 package com.altimterik.Loan.controller;
 
+import ch.qos.logback.core.pattern.parser.OptionTokenizer;
 import com.altimterik.Loan.models.*;
 import com.altimterik.Loan.repository.ApplicationDetailsRepo;
 import com.altimterik.Loan.repository.UserInputRepository;
@@ -8,12 +9,13 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/review")
 public class ReviewController {
 
@@ -155,6 +157,52 @@ public class ReviewController {
         rowItem.comments = (String)comment;
         System.out.println(rowItem);
         return rowItem;
+    }
+
+    @PostMapping(value = "/{uid}")
+    public String getDetails(@PathVariable(value = "uid", required = true) Integer uid
+            , @RequestParam(value="command", required = false) String command
+            , @RequestParam(value="comment", required = false) String comment
+            ){
+        System.out.println("Post Request received: command =>"+command+" comment:"+comment);
+        Optional<UserInputs> oui = userInputRepository.findById(uid);
+        Optional<ApplicationDetails> oad = applicationDetailsRepo.findByUserInputId(uid);
+        if(!oui.isPresent()){
+            return "The record does not exist in database";
+        }
+        if(!oad.isPresent()){
+            return "The record is not pre-processed yet.";
+        }
+        ApplicationDetails ad = oad.get();
+        if(comment!=null && !comment.isEmpty()){
+            ad.setApplicationComments(comment +" @"+ LocalDateTime.now()+"\n"+ad.getApplicationComments());
+        }
+        UserInputs ui = oui.get();
+        ui.setStatus(command);
+//        switch(command){
+//            case "approve":{
+//                ui.setStatus(command);
+//                break;
+//            }
+//            case "addInfo":{
+//
+//                break;
+//            }
+//            case "deny":{
+//
+//                break;
+//            }
+//            case "comment":{
+//
+//                break;
+//            }
+//            default:{
+//                System.out.println(command+" unknown command");
+//            }
+//        }
+        applicationDetailsRepo.save(ad);
+        userInputRepository.save(ui);
+        return "{success:Successfully reviewed application #"+uid+"}";
     }
 
 }
