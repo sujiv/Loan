@@ -18,7 +18,7 @@ public class UserInputs {
     String legalName;
     String primaryContact;
     String businessPhone;
-    String TIN_EIN_SIN;
+    String TIN;
     String accounts;
     String email;
     boolean nonProfit;
@@ -92,7 +92,7 @@ public class UserInputs {
     }
 
     public String getTIN_EIN_SIN() {
-        return TIN_EIN_SIN;
+        return TIN;
     }
 
     public String getAccounts() {
@@ -229,7 +229,7 @@ public class UserInputs {
     }
 
     public void setTIN_EIN_SIN(String TIN_EIN_SIN) {
-        this.TIN_EIN_SIN = TIN_EIN_SIN;
+        this.TIN = TIN_EIN_SIN;
     }
 
     public void setAccounts(String accounts) {
