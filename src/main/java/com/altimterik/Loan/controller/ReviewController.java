@@ -77,7 +77,7 @@ public class ReviewController {
             ListItem li = new ListItem();
             li.userInputId = ui.userInputId;
             li.legalName = ui.legalName;
-            li.TIN_EIN_SIN = ui.TIN;
+            li.TIN_EIN_SIN = ui.TIN_EIN_SIN;
             li.accounts = ui.accounts;
             li.irs941Uploaded = ui.irs941Uploaded?"Yes":"No";
             li.grossPayrollUploaded = ui.grossPayrollUploaded?"Yes":"No";
@@ -100,7 +100,7 @@ public class ReviewController {
             ud.legalName = ui.legalName;
             ud.primaryContact = ui.primaryContact;
             ud.businessPhone = ui.businessPhone;
-            ud.TIN_EIN_SIN = ui.TIN;
+            ud.TIN_EIN_SIN = ui.TIN_EIN_SIN;
             ud.accounts = ui.accounts;
             ud.email = ui.email;
             ud.tradeName = ui.tradeName;

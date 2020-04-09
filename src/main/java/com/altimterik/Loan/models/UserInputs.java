@@ -16,7 +16,7 @@ public class UserInputs {
     public String legalName;
     public String primaryContact;
     public String businessPhone;
-    public String TIN;
+    public String TIN_EIN_SIN;
     public String accounts;
     public String email;
     public Boolean nonProfit;
