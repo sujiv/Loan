@@ -13,7 +13,7 @@ public class FileStorage {
         this.userInputId = userInputId;
     }
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue
     Integer blobID;
 
@@ -21,7 +21,7 @@ public class FileStorage {
         return userInputId;
     }
 
-    Integer userInputId;
+    private Integer userInputId;
 
     @Lob
     @Column(name = "irs941")
