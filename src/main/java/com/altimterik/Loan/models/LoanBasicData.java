@@ -16,29 +16,29 @@ public class LoanBasicData {
     @Id
     @GeneratedValue
     Long Id;
-    String  legalName ;
+    String legalName ;
     String primaryContact;
     String businessPhone;
     String TIN_EIN_SIN;
     String accounts;
     String email ;
     String FTE_Emp12MnthsPrior;
-    String  empWages;
-    String  lessOwnerWagesExcess100K;
+    String empWages;
+    String lessOwnerWagesExcess100K;
     String lessQualifiedSickLeaveWagesUnderFFCRA;
-    String  lessQualifiedFamilyLeaveWagesUnderFFCRA;
+    String lessQualifiedFamilyLeaveWagesUnderFFCRA;
     String groupHealthCareBenefitsInsPremium;
     String paymentRetirementBen;
     String paymentEmployerPayrollTaxesStateLocal;
-    String  contractLabor;
+    String contractLabor;
     String lessIndividualContractLaborExcess100K;
-    String  prior12MnthsCumQualifyingPayrollCost;
-    String  avgMonthlyPayrollcosts;
-    String  multiplier2dot5;
+    String prior12MnthsCumQualifyingPayrollCost;
+    String avgMonthlyPayrollcosts;
+    String multiplier2dot5;
     String EDIL_ObtainedFrmJan31ToBeRefinanced;
     String PPP_LoadAmntLesserOfCalcOr10Mil;
-    String  fieldComments;
-    String  fieldAutoVerified;
+    String fieldComments;
+    String fieldAutoVerified;
     String applicationComments;
     Long blobID;
 
