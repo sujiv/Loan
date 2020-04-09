@@ -24,7 +24,7 @@ public class UserInputs {
     public Boolean indCont;
     public Boolean selfEmp;
     public String tradeName;
-    public Integer businessEntityType;
+    public String businessEntityType;
     public Double avgMonthlyPayrollcosts;
     public Integer numJobs;
     public String addInfo;
