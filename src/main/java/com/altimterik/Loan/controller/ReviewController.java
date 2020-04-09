@@ -170,7 +170,7 @@ public class ReviewController {
     }
 
     @PostMapping(value = "/{uid}")
-    public String getDetails(@PathVariable(value = "uid", required = true) Integer uid
+    public ResponseEntity<?> getDetails(@PathVariable(value = "uid", required = true) Integer uid
             , @RequestParam(value="command", required = false) String command
             , @RequestParam(value="comment", required = false) String comment
             ){
@@ -179,10 +179,10 @@ public class ReviewController {
         Optional<ApplicationDetails> oad = applicationDetailsRepo.findByUserInputId(uid);
         if(!oui.isPresent()){
 //            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("The record does not exist in database");
-            return "The record does not exist in database";
+            return new ResponseEntity<>("The record does not exist in database", HttpStatus.BAD_REQUEST);
         }
         if(!oad.isPresent()){
-            return "The record is not pre-processed yet.";
+            return new ResponseEntity<>("The record is not pre-processed yet.", HttpStatus.BAD_REQUEST);
         }
         ApplicationDetails ad = oad.get();
         if(comment!=null && !comment.isEmpty()){
@@ -213,7 +213,7 @@ public class ReviewController {
 //        }
         applicationDetailsRepo.save(ad);
         userInputRepository.save(ui);
-        return "{success:'Successfully reviewed application "+uid+"'}";
+        return new ResponseEntity<>(uid, HttpStatus.OK);
     }
 
 }

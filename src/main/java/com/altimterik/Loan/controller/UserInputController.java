@@ -48,13 +48,13 @@ public class UserInputController {
 
             if(mf.size()>=2 && mf.get(1)!=null) {
 
-                image.setHealthcareCostsOrginalFilesName(mf.get(1).getOriginalFilename());
-                image.setHealthcareCosts(mf.get(1).getBytes());
+                image.setGrossPayroll(mf.get(1).getBytes());
+                image.setGrossPayrollOrginalFilesName(mf.get(1).getOriginalFilename());
             }
 
             if(mf.size()>=3 && mf.get(2)!=null) {
-                image.setGrossPayroll(mf.get(2).getBytes());
-                image.setGrossPayrollOrginalFilesName(mf.get(2).getOriginalFilename());
+                image.setHealthcareCosts(mf.get(2).getBytes());
+                image.setHealthcareCostsOrginalFilesName(mf.get(2).getOriginalFilename());
             }
 
 
