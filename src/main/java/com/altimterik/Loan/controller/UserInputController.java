@@ -71,7 +71,7 @@ public class UserInputController {
 
             System.out.println("\n\n\n\n  current UserID is " +  currentuserInputId);
 
-            return new ResponseEntity<String>(" your loan application is created successfully with the following ID " + userInputs.getUserInputId(), HttpStatus.CREATED);
+            return new ResponseEntity<String>("your loan application is created successfully with the following ID " + userInputs.getUserInputId(), HttpStatus.CREATED);
         }
         catch (Exception e) {
             return new ResponseEntity<>( e.toString(),HttpStatus.BAD_REQUEST);

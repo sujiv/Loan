@@ -124,6 +124,7 @@ public class ReviewController {
                     ud.multiplier2dot5 = createJson(fields.get(12),sources.get(12),ad.multiplier2dot5,autoVerified.getString("multiplier2dot5"),comments.get("multiplier2dot5"));
                     ud.EDIL_ObtainedFrmJan31ToBeRefinanced = createJson(fields.get(13),sources.get(13),ad.EDIL_ObtainedFrmJan31ToBeRefinanced,autoVerified.getString("EDIL_ObtainedFrmJan31ToBeRefinanced"),comments.get("EDIL_ObtainedFrmJan31ToBeRefinanced"));
                     ud.PPP_LoadAmntLesserOfCalcOr10Mil = createJson(fields.get(14),sources.get(14),ad.PPP_LoadAmntLesserOfCalcOr10Mil,autoVerified.getString("PPP_LoadAmntLesserOfCalcOr10Mil"),comments.get("PPP_LoadAmntLesserOfCalcOr10Mil"));
+                    ud.applicationComments = ad.applicationComments;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -144,6 +145,7 @@ public class ReviewController {
                 ud.multiplier2dot5 = createJson(fields.get(12),sources.get(12),null,"","");
                 ud.EDIL_ObtainedFrmJan31ToBeRefinanced = createJson(fields.get(13),sources.get(13),null,"","");
                 ud.PPP_LoadAmntLesserOfCalcOr10Mil = createJson(fields.get(14),sources.get(14),null,"","");
+                ud.applicationComments = "";
             }
         }
         System.out.println(ud);
@@ -177,7 +179,7 @@ public class ReviewController {
         }
         ApplicationDetails ad = oad.get();
         if(comment!=null && !comment.isEmpty()){
-            ad.setApplicationComments(comment +" @"+ LocalDateTime.now()+"\n"+ad.getApplicationComments());
+            ad.setApplicationComments(comment +" |"+ad.getApplicationComments());
         }
         UserInputs ui = oui.get();
         ui.setStatus(command);
@@ -204,7 +206,7 @@ public class ReviewController {
 //        }
         applicationDetailsRepo.save(ad);
         userInputRepository.save(ui);
-        return ResponseEntity.status(HttpStatus.OK).body("Successfully reviewed application #"+uid);
+        return ResponseEntity.status(HttpStatus.OK).body("{success:'Successfully reviewed application "+uid+"'}");
     }
 
 }
