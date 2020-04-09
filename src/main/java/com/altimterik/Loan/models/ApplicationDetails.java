@@ -32,6 +32,7 @@ public class ApplicationDetails {
     public String fieldComments;
     @Column(length = 1000, nullable = true)
     public String fieldAutoVerified;
+    @Column(length = 1000, nullable = true)
     public String applicationComments;
     public Boolean processedFlag;
     public String processStatus;

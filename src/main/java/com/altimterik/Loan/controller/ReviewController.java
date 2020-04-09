@@ -7,6 +7,8 @@ import com.altimterik.Loan.repository.UserInputRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -160,7 +162,7 @@ public class ReviewController {
     }
 
     @PostMapping(value = "/{uid}")
-    public String getDetails(@PathVariable(value = "uid", required = true) Integer uid
+    public ResponseEntity<String> getDetails(@PathVariable(value = "uid", required = true) Integer uid
             , @RequestParam(value="command", required = false) String command
             , @RequestParam(value="comment", required = false) String comment
             ){
@@ -168,10 +170,10 @@ public class ReviewController {
         Optional<UserInputs> oui = userInputRepository.findById(uid);
         Optional<ApplicationDetails> oad = applicationDetailsRepo.findByUserInputId(uid);
         if(!oui.isPresent()){
-            return "The record does not exist in database";
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("The record does not exist in database");
         }
         if(!oad.isPresent()){
-            return "The record is not pre-processed yet.";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The record is not pre-processed yet.");
         }
         ApplicationDetails ad = oad.get();
         if(comment!=null && !comment.isEmpty()){
@@ -202,7 +204,7 @@ public class ReviewController {
 //        }
         applicationDetailsRepo.save(ad);
         userInputRepository.save(ui);
-        return "{success:Successfully reviewed application #"+uid+"}";
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully reviewed application #"+uid);
     }
 
 }
