@@ -23,7 +23,7 @@ public class UserInputController {
     @Autowired
     UserInputRepository userInputRepository;
 
-    private  static int currentuserInputId;
+    private  int currentuserInputId;
 
     @GetMapping("/")
     String  getdata(){
@@ -39,6 +39,7 @@ public class UserInputController {
         System.out.println("\n\n\n\n test  before and basic data==??? ");
 
         try {
+
             FileStorage image = new FileStorage();
             image.setIrs941(mf.get(0).getBytes());
             image.setIrs941OrginalFilesName(mf.get(0).getOriginalFilename());
