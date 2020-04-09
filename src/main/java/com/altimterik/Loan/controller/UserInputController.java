@@ -37,7 +37,7 @@ public class UserInputController {
             method = RequestMethod.POST)
     public ResponseEntity<String> uploadPolicyDocument(@RequestParam("document") List<MultipartFile> mf) {
 
-        System.out.println("\n\n\nn\n test  before and basic data==??? ");
+        System.out.println("\n\n\n\n test  before and basic data==??? ");
 
         try {
             FileStorage image = new FileStorage();
@@ -47,7 +47,7 @@ public class UserInputController {
 
             image.setUserInputId(currentuserInputId);
             image= fileStorageRepository.save(image);
-            System.out.println("\n\n\nn\n test  after image is inserted ");
+            System.out.println("\n\n\n\n test  after image is inserted ");
             return new ResponseEntity<String>(" the  scanned images are  created succefully saved  " + image.getBlobID(), HttpStatus.CREATED);
 
         } catch (IOException e) {
@@ -60,7 +60,7 @@ public class UserInputController {
 
     @PostMapping("/sba/loan/upload/basicdata")
     public ResponseEntity<String> uploadPolicyDocument(@RequestBody UserInputs filledUserInputs){
-        System.out.println("\n\n\nn\n test  before and basic data==??? " +  filledUserInputs.getLegalName());
+        System.out.println("\n\n\n\n test  before and basic data==??? " +  filledUserInputs.getLegalName());
         try {
             UserInputs userInputs = new UserInputs();
             userInputs= filledUserInputs;
@@ -71,7 +71,7 @@ public class UserInputController {
 
             currentuserInputId= userInputs.getUserInputId();
 
-            System.out.println("\n\n\nn\n  current UserID is " +  currentuserInputId);
+            System.out.println("\n\n\n\n  current UserID is " +  currentuserInputId);
 
             return new ResponseEntity<String>(" your loan application is created successfully with the following ID " + userInputs.getUserInputId(), HttpStatus.CREATED);
         }
