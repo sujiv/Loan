@@ -44,8 +44,8 @@ public class UserInputData {
     public Boolean healthcareCostsUploaded;
     public Boolean grossPayrollUploaded;
     public String status;
-    @Basic(optional = false)
-    @Column(name = "createdTs", insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date createdTs;
+//    @Basic(optional = false)
+//    @Column(name = "createdTs", insertable = false, updatable = false)
+//    @Temporal(TemporalType.TIMESTAMP)
+//    public Date createdTs;
 }
