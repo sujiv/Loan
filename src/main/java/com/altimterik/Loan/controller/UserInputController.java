@@ -37,16 +37,22 @@ public class UserInputController {
             method = RequestMethod.POST)
     public ResponseEntity<String> uploadPolicyDocument(@RequestParam("document") List<MultipartFile> mf) {
 
-        System.out.println("\n\n\nn\n test  before and basic data==??? ");
+        System.out.println("\n\n\nn\n test  before saving Images");
 
         try {
             FileStorage image = new FileStorage();
             image.setIrs941(mf.get(0).getBytes());
+            image.setIrs941OrginalFilesName(mf.get(0).getOriginalFilename());
+
             image.setHealthcareCosts(mf.get(1).getBytes());
+            image.setHealthcareCostsOrginalFilesName(mf.get(1).getOriginalFilename());                                                                       [Ø∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏∏QW']]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]']
             image.setGrossPayroll(mf.get(2).getBytes());
+            image.setGrossPayrollOrginalFilesName(mf.get(2).getOriginalFilename());
 
             image.setUserInputId(currentuserInputId);
+
             image= fileStorageRepository.save(image);
+
             System.out.println("\n\n\nn\n test  after image is inserted ");
             return new ResponseEntity<String>(" the  scanned images are  created succefully saved  " + image.getBlobID(), HttpStatus.CREATED);
 
@@ -64,9 +70,7 @@ public class UserInputController {
         try {
             UserInputs userInputs = new UserInputs();
             userInputs= filledUserInputs;
-            userInputs.setIrs941Uploaded(true);
-            userInputs.setHealthcareCostsUploaded(true);
-            userInputs.setGrossPayrollUploaded(true);
+//
             userInputs = userInputRepository.save(userInputs);
 
             currentuserInputId= userInputs.getUserInputId();
