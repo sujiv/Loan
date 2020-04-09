@@ -2,7 +2,7 @@ package com.altimterik.Loan.controller;
 
 import com.altimterik.Loan.models.*;
 import com.altimterik.Loan.repository.ApplicationDetailsRepo;
-import com.altimterik.Loan.repository.UserInputRepo;
+import com.altimterik.Loan.repository.UserInputRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class ReviewController {
     }
 
     @Autowired
-    UserInputRepo userInputRepo;
+    UserInputRepository userInputRepository;
 
     @Autowired
     ApplicationDetailsRepo applicationDetailsRepo;
@@ -69,7 +69,7 @@ public class ReviewController {
     @GetMapping(value = "", produces = "application/json")
     public List<ListItem> getList(){
         List listItems = new ArrayList();
-        for(UserInputData ui: userInputRepo.findAll()){
+        for(UserInputs ui: userInputRepository.findAll()){
             ListItem li = new ListItem();
             li.userInputId = ui.userInputId;
             li.legalName = ui.legalName;
@@ -87,11 +87,11 @@ public class ReviewController {
     @GetMapping(value = "/{uid}", produces = "application/json")
     public UserApplicationDetails getDetails(@PathVariable(value = "uid", required = true) Integer uid){
         UserApplicationDetails ud = new UserApplicationDetails();
-        Optional<UserInputData> userInputData = userInputRepo.findById(uid);
+        Optional<UserInputs> userInputData = userInputRepository.findById(uid);
         Optional<ApplicationDetails> applicationDetails = applicationDetailsRepo.findByUserInputId(uid);
         System.out.println("uid: "+uid);
         if(userInputData.isPresent()){
-            UserInputData ui = userInputData.get();
+            UserInputs ui = userInputData.get();
             ud.userInputId = ui.userInputId;
             ud.legalName = ui.legalName;
             ud.primaryContact = ui.primaryContact;
