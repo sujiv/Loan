@@ -1,19 +1,21 @@
 package com.altimterik.Loan.models;
 
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
+
 @Entity
-//@Table(name="FileStorage")
+@Data
+//@Table(name = "file_storage")
 public class FileStorage {
 
-    public void setUserInputId(Integer userInputId) {
-        this.userInputId = userInputId;
-    }
+   
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue
     Integer blobID;
 
@@ -21,91 +23,41 @@ public class FileStorage {
         return userInputId;
     }
 
-    Integer userInputId;
+    private Integer userInputId;
 
     @Lob
-    @Column(name = "irs941")
     private byte[] irs941;
-    private String  irs941OrginalFilesName;
 
     @Lob
-    @Column(name = "healthcareCosts")
     private byte[] healthcareCosts;
-    private String  healthcareCostsOrginalFilesName;
-
-    public void setIrs941OrginalFilesName(String irs941OrginalFilesName) {
-        this.irs941OrginalFilesName = irs941OrginalFilesName;
-    }
-
-    public void setHealthcareCostsOrginalFilesName(String healthcareCostsOrginalFilesName) {
-        this.healthcareCostsOrginalFilesName = healthcareCostsOrginalFilesName;
-    }
-
-    public void setGrossPayrollOrginalFilesName(String grossPayrollOrginalFilesName) {
-        this.grossPayrollOrginalFilesName = grossPayrollOrginalFilesName;
-    }
 
     @Lob
-    @Column(name = "grossPayroll")
     private byte[] grossPayroll;
+
+    private String  irs941OrginalFilesName;
+    private String  healthcareCostsOrginalFilesName;
     private String  grossPayrollOrginalFilesName;
 
-    public String getIrs941OrginalFilesName() {
-        return irs941OrginalFilesName;
-    }
+    private Boolean irs941Processed = false;
 
-    public String getHealthcareCostsOrginalFilesName() {
-        return healthcareCostsOrginalFilesName;
-    }
+    private Boolean healthcareCostsProcessed = false;
 
-    public String getGrossPayrollOrginalFilesName() {
-        return grossPayrollOrginalFilesName;
-    }
+    private Boolean grossPayrollProcessed = false;
 
-    @CreationTimestamp
-    LocalDate createdTs;
+    private Timestamp createdTs;
+    
+    public void setUserInputId(Integer userInputId) {
+        this.userInputId = userInputId;
+    }
 
     public FileStorage() {
     }
 
-    public Integer getBlobID() {
-        return blobID;
-    }
-
-    public byte[] getIrs941() {
-        return irs941;
-    }
-
-    public byte[] getHealthcareCosts() {
-        return healthcareCosts;
-    }
-
-    public byte[] getGrossPayroll() {
-        return grossPayroll;
-    }
-
-    public LocalDate getCreatedTs() {
-        return createdTs;
-    }
-
-    public void setBlobID(Integer blobID) {
-        this.blobID = blobID;
-    }
-
-    public void setIrs941(byte[] irs941) {
+    public FileStorage(byte[] irs941, byte[] grossPayroll) {
         this.irs941 = irs941;
-    }
-
-    public void setHealthcareCosts(byte[] healthcareCosts) {
-        this.healthcareCosts = healthcareCosts;
-    }
-
-    public void setGrossPayroll(byte[] grossPayroll) {
+//        this.healthcareCosts = healthcareCosts;
         this.grossPayroll = grossPayroll;
     }
 
-    public void setCreatedTs(LocalDate createdTs) {
-        this.createdTs = createdTs;
-    }
 
 }

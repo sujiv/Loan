@@ -25,8 +25,6 @@ public class UserInputs {
     public Boolean indCont;
     public Boolean selfEmp;
     public String tradeName;
-//    public Integer businessEntityType;
-
     public String businessEntityType;
     public Double avgMonthlyPayrollcosts;
     public Integer numJobs;
@@ -49,7 +47,7 @@ public class UserInputs {
     public Boolean irs941Uploaded;
     public Boolean healthcareCostsUploaded;
     public Boolean grossPayrollUploaded;
-    public String status;
+    public String status = "Submitted";
 //    @Basic(optional = false)
 //    @Column(name = "createdTs", insertable = false, updatable = false)
 //    @Temporal(TemporalType.TIMESTAMP)
