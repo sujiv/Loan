@@ -4,6 +4,7 @@ import com.altimterik.Loan.models.FileStorage;
 import com.altimterik.Loan.models.UserInputs;
 import com.altimterik.Loan.repository.FileStorageRepository;
 import com.altimterik.Loan.repository.UserInputRepository;
+import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -28,10 +29,10 @@ public class UserInputController {
     @Autowired
     UserInputRepository userInputRepository;
 
-    @GetMapping("/")
+    @GetMapping("/bachingprocessing")
     String  getdata(){
         System.out.println(" this is test one" );
-        return  " test";
+        return  " test 120";
     }
 
     @RequestMapping(value = "/sba/loan/upload/{id}",
@@ -40,11 +41,31 @@ public class UserInputController {
     public ResponseEntity<Integer> uploadPolicyDocument(@RequestParam("document") List<MultipartFile> mf, @PathVariable("id") Integer id) {
 
 
-        System.out.println("image file name \n\n\n\n\n  " + mf.get(0).getName());
+        System.out.println("  " + mf.get(0).getName());
 
 
         try {
+
             FileStorage image = new FileStorage();
+//
+//            ////////
+//            for (int i = 0; i < mf.size(); i++) {
+//                String imageCatagory =mf.get(i)..getOriginalFilename().substring(0,3);
+//
+//                if(imageCatagory.equalsIgnoreCase("irs")){
+//                }
+//
+//                if(imageCatagory.equalsIgnoreCase("hcc")){
+//
+//                }
+//
+//                if(imageCatagory.equalsIgnoreCase("hcc")){
+//
+//                }
+//
+//            }
+
+
             if(mf.size()>=1 && mf.get(0)!=null) {
                 image.setIrs941(mf.get(0).getBytes());
                 image.setIrs941OrginalFilesName(mf.get(0).getOriginalFilename());
@@ -53,13 +74,13 @@ public class UserInputController {
 
             if(mf.size()>=2 && mf.get(1)!=null) {
 
-                image.setGrossPayroll(mf.get(1).getBytes());
-                image.setGrossPayrollOrginalFilesName(mf.get(1).getOriginalFilename());
+                image.setHealthcareCostsOrginalFilesName(mf.get(1).getOriginalFilename());
+                image.setHealthcareCosts(mf.get(1).getBytes());
             }
 
             if(mf.size()>=3 && mf.get(2)!=null) {
-                image.setHealthcareCosts(mf.get(2).getBytes());
-                image.setHealthcareCostsOrginalFilesName(mf.get(2).getOriginalFilename());
+                image.setGrossPayroll(mf.get(2).getBytes());
+                image.setGrossPayrollOrginalFilesName(mf.get(2).getOriginalFilename());
             }
 
 
