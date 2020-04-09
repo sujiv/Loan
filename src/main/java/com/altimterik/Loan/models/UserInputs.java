@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class UserInputs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+//    @Column (name = "id")
     public Integer userInputId;
     public String legalName;
     public String primaryContact;
