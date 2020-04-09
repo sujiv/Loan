@@ -26,14 +26,41 @@ public class FileStorage {
     @Lob
     @Column(name = "irs941")
     private byte[] irs941;
+    private String  irs941OrginalFilesName;
 
     @Lob
     @Column(name = "healthcareCosts")
     private byte[] healthcareCosts;
+    private String  healthcareCostsOrginalFilesName;
+
+    public void setIrs941OrginalFilesName(String irs941OrginalFilesName) {
+        this.irs941OrginalFilesName = irs941OrginalFilesName;
+    }
+
+    public void setHealthcareCostsOrginalFilesName(String healthcareCostsOrginalFilesName) {
+        this.healthcareCostsOrginalFilesName = healthcareCostsOrginalFilesName;
+    }
+
+    public void setGrossPayrollOrginalFilesName(String grossPayrollOrginalFilesName) {
+        this.grossPayrollOrginalFilesName = grossPayrollOrginalFilesName;
+    }
 
     @Lob
     @Column(name = "grossPayroll")
     private byte[] grossPayroll;
+    private String  grossPayrollOrginalFilesName;
+
+    public String getIrs941OrginalFilesName() {
+        return irs941OrginalFilesName;
+    }
+
+    public String getHealthcareCostsOrginalFilesName() {
+        return healthcareCostsOrginalFilesName;
+    }
+
+    public String getGrossPayrollOrginalFilesName() {
+        return grossPayrollOrginalFilesName;
+    }
 
     @CreationTimestamp
     LocalDate createdTs;
