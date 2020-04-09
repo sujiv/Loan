@@ -4,12 +4,17 @@ import com.altimterik.Loan.models.FileStorage;
 import com.altimterik.Loan.models.UserInputs;
 import com.altimterik.Loan.repository.FileStorageRepository;
 import com.altimterik.Loan.repository.UserInputRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,40 +28,47 @@ public class UserInputController {
     @Autowired
     UserInputRepository userInputRepository;
 
-    private  int currentuserInputId;
-
     @GetMapping("/")
     String  getdata(){
         System.out.println(" this is test one" );
         return  " test";
     }
 
-    @RequestMapping(value = "/sba/loan/upload",
+    @RequestMapping(value = "/sba/loan/upload/{id}",
             headers = "content-type=multipart/form-data",
             method = RequestMethod.POST)
-    public ResponseEntity<String> uploadPolicyDocument(@RequestParam("document") List<MultipartFile> mf) {
+    public ResponseEntity<Integer> uploadPolicyDocument(@RequestParam("document") List<MultipartFile> mf, @PathVariable("id") Integer id) {
 
-        System.out.println("\n\n\n\n test  before and basic data==??? ");
+
+        System.out.println("image file name \n\n\n\n\n  " + mf.get(0).getName());
+
 
         try {
-
             FileStorage image = new FileStorage();
-            image.setIrs941(mf.get(0).getBytes());
-            image.setIrs941OrginalFilesName(mf.get(0).getOriginalFilename());
+            if(mf.size()>=1 && mf.get(0)!=null) {
+                image.setIrs941(mf.get(0).getBytes());
+                image.setIrs941OrginalFilesName(mf.get(0).getOriginalFilename());
 
-            image.setHealthcareCostsOrginalFilesName(mf.get(1).getOriginalFilename());
-            image.setHealthcareCosts(mf.get(1).getBytes());
+            }
 
-            image.setGrossPayroll(mf.get(2).getBytes());
-            image.setGrossPayrollOrginalFilesName(mf.get(2).getOriginalFilename());
+            if(mf.size()>=2 && mf.get(1)!=null) {
 
-            image.setUserInputId(currentuserInputId);
+                image.setHealthcareCostsOrginalFilesName(mf.get(1).getOriginalFilename());
+                image.setHealthcareCosts(mf.get(1).getBytes());
+            }
+
+            if(mf.size()>=3 && mf.get(2)!=null) {
+                image.setGrossPayroll(mf.get(2).getBytes());
+                image.setGrossPayrollOrginalFilesName(mf.get(2).getOriginalFilename());
+            }
+
+
+            image.setUserInputId(id);
             image= fileStorageRepository.save(image);
-            System.out.println("\n\n\n\n test  after image is inserted ");
-            return new ResponseEntity<String>(" the  scanned images are  created succefully saved  " + image.getBlobID(), HttpStatus.CREATED);
+            return new ResponseEntity<>(image.getBlobID(), HttpStatus.CREATED);
 
         } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -64,24 +76,19 @@ public class UserInputController {
 //    ============= Saving all basic user Input data========================
 
     @PostMapping("/sba/loan/upload/basicdata")
-    public ResponseEntity<String> uploadPolicyDocument(@RequestBody UserInputs filledUserInputs){
-        System.out.println("\n\n\n\n test  before and basic data==??? " +  filledUserInputs.getLegalName());
-        System.out.println("*************************"+filledUserInputs.getTIN());
+    public ResponseEntity<Integer> uploadPolicyDocument(@RequestBody UserInputs filledUserInputs){
+
         try {
-            UserInputs userInputs = new UserInputs();
-            userInputs= filledUserInputs;
-            userInputs = userInputRepository.save(userInputs);
+            UserInputs userInputs;
 
-            currentuserInputId= userInputs.getUserInputId();
-            System.out.println("\n\n\n\n  current UserID is " +  currentuserInputId);
+            userInputs = userInputRepository.save(filledUserInputs);
 
-            return new ResponseEntity<String>("your loan application is created successfully with the following ID " + userInputs.getUserInputId(), HttpStatus.CREATED);
+            return new ResponseEntity<>(userInputs.getUserInputId(), HttpStatus.CREATED);
         }
         catch (Exception e) {
-            return new ResponseEntity<>( e.toString(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
 
     }
-
 
 }
