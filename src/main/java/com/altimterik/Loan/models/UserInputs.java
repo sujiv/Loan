@@ -16,7 +16,7 @@ public class UserInputs {
     public String legalName;
     public String primaryContact;
     public String businessPhone;
-    public String TIN_EIN_SIN;
+    public String TIN;
     public String accounts;
     public String email;
     public Boolean nonProfit;
@@ -25,7 +25,9 @@ public class UserInputs {
     public Boolean indCont;
     public Boolean selfEmp;
     public String tradeName;
-    public Integer businessEntityType;
+//    public Integer businessEntityType;
+
+    public String businessEntityType;
     public Double avgMonthlyPayrollcosts;
     public Integer numJobs;
     public String addInfo;
