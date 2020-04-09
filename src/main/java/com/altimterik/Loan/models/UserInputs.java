@@ -91,7 +91,7 @@ public class UserInputs {
         return businessPhone;
     }
 
-    public String getTIN_EIN_SIN() {
+    public String getTIN() {
         return TIN;
     }
 
@@ -228,8 +228,8 @@ public class UserInputs {
         this.businessPhone = businessPhone;
     }
 
-    public void setTIN_EIN_SIN(String TIN_EIN_SIN) {
-        this.TIN = TIN_EIN_SIN;
+    public void setTIN(String TIN) {
+        this.TIN = TIN;
     }
 
     public void setAccounts(String accounts) {
