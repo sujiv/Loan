@@ -65,7 +65,7 @@ public class UserInputController {
     @PostMapping("/sba/loan/upload/basicdata")
     public ResponseEntity<String> uploadPolicyDocument(@RequestBody UserInputs filledUserInputs){
         System.out.println("\n\n\n\n test  before and basic data==??? " +  filledUserInputs.getLegalName());
-        System.out.println(filledUserInputs);
+        System.out.println("*************************"+filledUserInputs.getTIN());
         try {
             UserInputs userInputs = new UserInputs();
             userInputs= filledUserInputs;
